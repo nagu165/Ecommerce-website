@@ -1,6 +1,7 @@
 import { PageResult } from "@/typings";
 import Link from "next/link";
 import { hrtime } from "process";
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, Key } from "react";
 
 type Props = {
     results: PageResult[];
@@ -16,12 +17,12 @@ function ResultsList({results, term}: Props) {
             {/* each page */}
             {results.map((pageResult) => (
                 <div key={pageResult.job_id} className="space-y-2">
-                    {pageResult.content.results.filters?.map((filter, i) => (
+                    {pageResult.content.results.filters?.map((filter: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; values: any[]; }, i: Key | null | undefined) => (
                         <div key={i} className="border rounded-r-lg md:rounded-lg p-5">
                             <p className="font-bold">{filter.name}</p>
                             <div className="flex flex-col">
-                            {filter.values.map((value) => (
-                                <Link prefetch={false} href={`https://www.google.com${value.url}`}>
+                            {filter.values.map((value,i) => (
+                                <Link key={i} prefetch={false} href={`https://www.google.com${value.url}`}>
                                 {value.value}
                                 </Link>
                             ))}
@@ -45,11 +46,11 @@ function ResultsList({results, term}: Props) {
                             </h2>
                         </div>
                         <h3>
-                            Showing results for "{decodeURIComponent(term)}"
+                            Showing results for - {decodeURIComponent(term)}
                         </h3>
                     </div>
 
-                    {pageResult?.content?.results?.organic?.map((item) => (
+                    {pageResult?.content?.results?.organic?.map((item: { url: string; pos: Key | null | undefined; title: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; price_str: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; currency: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; merchant: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; }; }) => (
                         <Link href={item.url.includes("url?url=") ?
                         // send to external url
                         item.url.split("url?url=")?.[1] :

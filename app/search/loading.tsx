@@ -8,7 +8,7 @@ function LoadingPage() {
             {/* sidebar */}
             <div className='w-36 md:w-64 space-y-5'>
                 {[...Array(4)].map((_,i) => (
-                    <div className='border rounded-r-lg md:rounded-lg p-5'>
+                    <div key={i} className='border rounded-r-lg md:rounded-lg p-5'>
                         <p className='font-bold'>
                             <Skeleton />
                         </p>
@@ -27,8 +27,8 @@ function LoadingPage() {
                         </h2>
                     </div>
 
-                    {[...Array(10)].map((item) => (
-                        <div className='p-5 border rounded-2xl'>
+                    {[...Array(10)].map((item,i) => (
+                        <div key={i} className='p-5 border rounded-2xl'>
                             <Skeleton count={2} />
                             <br />
                             <Skeleton count={1} />

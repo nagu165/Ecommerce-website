@@ -1,6 +1,7 @@
 import { getFetchUrl } from "@/lib/getFetchUrl";
 import { ProductData } from "@/typings";
 import { StarIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export const revalidate = 300;
@@ -46,7 +47,7 @@ async function ProductPage({params: {id}}: Props) {
          <section className="flex flex-col lg:flex-row mt-5 md:mt-0">
           <div className="md:p-10 md:pl-0 mx-auto">
             <div className="flex gap-4">
-              <img 
+              <Image
               className="h-80 w-80 p-5 border rounded-md object-contain"
               src={productData.content.images?.full_size[0]} 
               alt="" 
@@ -54,8 +55,9 @@ async function ProductPage({params: {id}}: Props) {
               <div className="flex flex-col justify-between">
                 {productData.content.images?.full_size
                     .slice(1,3)
-                    .map((image) => (
-                      <img 
+                    .map((image,i) => (
+                      <Image 
+                      key={i}
                       className="w-[9.5rem] h-[9.5rem] object-contain border rounded-md"
                       src={image} 
                       alt="" 
@@ -65,8 +67,8 @@ async function ProductPage({params: {id}}: Props) {
             </div>
 
             <div className="flex space-x-6 overflow-x-scroll py-2 md:w-[30rem]">
-              {productData.content.images?.full_size.slice(3).map((image) => (
-                <img src={image} alt="" className="w-20 h-20 object-contain"/>
+              {productData.content.images?.full_size.slice(3).map((image,i) => (
+                <Image src={image} alt="" className="w-20 h-20 object-contain" key={i}/>
               ))}
             </div>
 
@@ -112,8 +114,8 @@ async function ProductPage({params: {id}}: Props) {
                   <h3 className="font-bold text-2xl">Product Highlights</h3>
                   <hr />
                   <ul className="space-y-2">
-                    {productData.content.highlights?.map((highlight) => (
-                      <li className="list-disc">{highlight}</li>
+                    {productData.content.highlights?.map((highlight,i) => (
+                      <li key={i} className="list-disc">{highlight}</li>
                     ))}
                   </ul>
                 </div>
@@ -154,7 +156,7 @@ async function ProductPage({params: {id}}: Props) {
                   ))}
                 </div>
 
-                <p>"{productData.content.reviews.top_review.text}"</p>
+                <p>{productData.content.reviews.top_review.text}</p>
               </div>
             )}
             </>
