@@ -49,7 +49,7 @@ function ResultsList({ results, term }: Props) {
                     className="object-contain h-40"
                     width={200}
                     height={200}
-                    />
+                  />
                   <p className="text-[#1B66D2]">{item.title}</p>
                 </div>
 
@@ -61,7 +61,7 @@ function ResultsList({ results, term }: Props) {
             ))
           ) : (
             <div className="col-span-full text-center py-5">
-              <p className="text-gray-500">No results found for "{decodeURIComponent(term)}".</p>
+              <p className="text-gray-500">No results found for &quot;{decodeURIComponent(term)}&quot;.</p>
             </div>
           )}
         </div>
