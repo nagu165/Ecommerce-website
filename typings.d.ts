@@ -6,28 +6,27 @@ export type SearchParams = {
 };
 
 type PageResult = {
-    content: Content;
-    created_at: string;
-    updated_at: string;
-    page: number;
-    url: string;
-    job_id: string;
-    status_code: number;
-    parser_type: string;
+    id: number; // FakeStoreAPI uses numeric IDs
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+    rating: {
+        rate: number; // Rating value
+        count: number; // Number of ratings
+    };
 };
 
 type Content = {
-    url: string;
-    page: number;
-    results: ResultOptions;
+    results: PageResult[]; // Array of products
     last_visible_page: number;
     parse_status_code: number;
 };
 
 type Results = {
-    paid: any[];
     filters: Filter[];
-    organic: Organic;
+    organic: Organic[]; // Assuming organic results are products
     search_information: {
         query: string;
         showing_results_for: number;
@@ -42,85 +41,41 @@ type Filter = {
 type Value = {
     url: string;
     value: string;
-}
+};
 
 type Organic = {
-    pos: number;
-    url: string;
-    type: string;
-    price: number;
+    id: number; // Product ID
     title: string;
-    currency: string;
-    merchant: {
-        url: string;
-        name: string;
+    price: number;
+    category: string;
+    image: string;
+    rating: {
+        rate: number; // Rating value
+        count: number; // Number of ratings
     };
-    price_str: string;
-    pos_overall: number;
 };
 
 export type ProductData = {
-    content: ProductContent;
-    created_at: string;
-    updated_at: string;
-    page: number;
-    url: string;
-    job_id: string;
-    status_code: number;
-    parser_type: string;
+    id: number; // Product ID
+    title: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    rating: {
+        rate: number; // Rating value
+        count: number; // Number of ratings
+    };
 };
 
 export type ProductContent = {
-    url: string;
     title: string;
     description: string;
-    images: {
-        full_size: string[];
-        thumbnail: string[];
+    image: string;
+    price: number;
+    category: string;
+    rating: {
+        rate: number; // Rating value
+        count: number; // Number of ratings
     };
-    highlights: string[];
-    reviews: {
-        rating: number;
-        top_review: {
-            title: string;
-            author: string;
-            source: string;
-            text: string;
-            rating: number;
-        };
-        rating_stars: number;
-        reviews_count: number;
-        reviews_by_stars: {
-            [starRating]: {
-                url: string;
-                reviews_count: number;
-            };
-        };
-    };
-    pricing: {
-        online: [
-            {
-                price: number;
-                currency: string;
-                seller: string;
-                details: string;
-                condition: string;
-                price_tax: number;
-                price_total: number;
-                seller_link: string;
-                price_shipping: number;
-            }
-        ];
-    };
-    specifications: [
-        {
-            items: [
-                {
-                    title: string;
-                    value: string;
-                },
-            ];
-            section_title: string;
-        }
-    ];
 };

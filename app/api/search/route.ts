@@ -1,52 +1,58 @@
 import { PageResult, SearchParams } from "@/typings";
 import { NextResponse } from "next/server";
 
-export async function POST(request:Request){
-    const { searchTerm, pages, ...params } = await request.json();
-    const searchParams: SearchParams = params;
+export async function POST(request: Request) {
+  const { searchTerm, pages, ...params } = await request.json();
+  const searchParams: SearchParams = params;
 
-    if(!searchTerm){
-        return NextResponse.next(
-            new Response("Missing search term", {
-                status: 400,
-            })
-        )
+  if (!searchTerm) {
+    return NextResponse.next(
+      new Response("Missing search term", {
+        status: 400,
+      })
+    );
+  }
+
+  const filters: any = [];
+
+  Object.entries(searchParams).forEach(([key, value]) => {
+    if (value) {
+      if (key === "max_price") {
+        if (value === "1000+") return;
+      }
+
+      filters.push({
+        key,
+        value: key === 'sort_by' ? value : Number(value),
+      });
     }
-    const filters: any = [];
+  });
 
-    Object.entries(searchParams).forEach(([key, value]) => {
-        if(value){
-            if(key == "max_price"){
-                if((value = "1000+")) return;
-            }
+  let url = 'https://fakestoreapi.com/products';
 
-            filters.push({
-                key,
-                value: key === 'sort_by' ? value : Number(value),
-            })
-        }
-    });
+  if (searchTerm) {
+    url += `?q=${searchTerm}`;
+  }
 
-    const response = await fetch('https://realtime.oxylabs.io/v1/queries', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Basic ${Buffer.from(process.env.OXYLABS_USERNAME + ':' + process.env.OXYLABS_PASSWORD).toString("base64")}`,
-        },
-        cache: 'no-store',
-        body: JSON.stringify({
-            source: 'google_shopping_search',
-            domain: 'co.in',
-            query: searchTerm,
-            pages: Number(pages) || 1,
-            context: filters,
-            parse: true,
-        })
-    });
+  filters.forEach((filter: any) => {
+    if (filter.key === 'category') {
+      url += `&category=${filter.value}`;
+    } else if (filter.key === 'sort_by') {
+      url += `&sort=${filter.value}`;
+    }
+  });
 
-    const data = await response.json();
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    cache: 'no-store',
+  });
 
-    const pageResults: PageResult[] = data.results;
+  const data = await response.json();
 
-    return NextResponse.json(pageResults)
+  const pageResults: PageResult[] = data;
+
+  return NextResponse.json(pageResults);
 }

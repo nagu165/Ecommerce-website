@@ -1,62 +1,57 @@
 import Link from "next/link";
 
-const SEARCHES = [
+const CATEGORIES = [
   {
     id: 1,
-    term: "Monitors over $500",
-    url: "/search/monitors?sort_by=r&min_price=500",
-    color: "bg-blue-500",
+    name: "Electronics",
+    image: "/electronic.jpeg", // Replace with actual image URL
+    url: "/search/electronics",
   },
   {
     id: 2,
-    term: "iPhone 14 pro max",
-    url: "/search/iPhone 14 pro max",
-    color: "bg-red-500",
+    name: "Jewelery",
+    image: "/jewelry.jpeg", // Replace with actual image URL
+    url: "/search/jewelery",
   },
   {
     id: 3,
-    term: "Macbook Pro",
-    url: "/search/macbook",
-    color: "bg-yellow-500",
+    name: "Men's Clothing",
+    image: "/men-clothing.jpeg", // Replace with actual image URL
+    url: "/search/men's clothing",
   },
   {
     id: 4,
-    term: "Airpods Pro",
-    url: "/search/airpods",
-    color: "bg-green-500",
-  },
-  {
-    id: 5,
-    term: "Tablets under $300",
-    url: "/search/tablets?sort_by=r&max_price=300",
-    color: "bg-purple-500",
+    name: "Women's Clothing",
+    image: "/woman-clothing.jpeg", // Replace with actual image URL
+    url: "/search/women's clothing",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="p-10 pt-0 text-center md:text-left">
-      <h1 className="text-3xl font-extralight mb-5">
-        Welcome to Google Shopping
-      </h1>
-      <h2 className="mb-5">
-        Get started by clicking on one of the example search items or typing in an item yourself above!
-      </h2>
+    <div className="pt-11 text-center md:text-left bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
+      <p className="text-3xl font-bold mb-5 text-gray-800">
+        Happy Shopping!
+      </p>
+      <p className="mb-5 text-gray-600 font-light">
+        Get started by clicking on one of the example categories below!
+      </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center items-center gap-5 mt-5">
-        {
-          // map through searches and display them
-          SEARCHES.map((search) => (
-            <Link
-            prefetch={false}
-              key={search.id}
-              href={search.url}
-              className={`${search.color} w-full h-36 hover:opacity-50 text-white font-bold py-2 px-4 rounded`}
-            >
-              {search.term}
-            </Link>
-          ))
-        }
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5">
+        {CATEGORIES.map((category) => (
+          <Link key={category.id} href={category.url}>
+            <div className="relative group shadow-lg rounded-lg overflow-hidden">
+              <img
+                src={category.image}
+                alt={category.name}
+                className="w-full h-auto object-cover rounded-lg transition-transform transform group-hover:scale-105"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white text-xl font-bold">{category.name}</span>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
