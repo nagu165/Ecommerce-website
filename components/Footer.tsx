@@ -13,13 +13,13 @@ const Footer = () => {
                 <Link href="/search/electronics" className="hover:text-gray-400 transition-colors">Electronics</Link>
               </li>
               <li>
-                <Link href="/search/jewelery" className="hover:text-gray-400 transition-colors">Jewelery</Link>
+                <Link href="/search/jewelery" className="hover:text-gray-400 transition-colors">Jewelry</Link>
               </li>
               <li>
-                <Link href="/search/men's clothing" className="hover:text-gray-400 transition-colors">Men's Clothing</Link>
+                <Link href="/search/mens-clothing" className="hover:text-gray-400 transition-colors">Men&apos;s Clothing</Link>
               </li>
               <li>
-                <Link href="/search/women's clothing" className="hover:text-gray-400 transition-colors">Women's Clothing</Link>
+                <Link href="/search/womens-clothing" className="hover:text-gray-400 transition-colors">Women&apos;s Clothing</Link>
               </li>
             </ul>
           </div>
@@ -45,24 +45,24 @@ const Footer = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4">Follow Us</h2>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                 <FaFacebook className="h-6 w-6 hover:text-gray-400 transition-colors" />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              </Link>
+              <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                 <FaTwitter className="h-6 w-6 hover:text-gray-400 transition-colors" />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              </Link>
+              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                 <FaInstagram className="h-6 w-6 hover:text-gray-400 transition-colors" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              </Link>
+              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
                 <FaLinkedin className="h-6 w-6 hover:text-gray-400 transition-colors" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-600 mt-8 pt-4 text-center">
-          <p className="text-sm">&copy; {new Date().getFullYear()} FakeStoreAPI. All rights reserved.</p>
+          <p className="text-sm">&copy; {new Date().getFullYear()} MyStore. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -1,5 +1,6 @@
 import { PageResult } from "@/typings";
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   results: PageResult[];
@@ -14,9 +15,9 @@ function ResultsList({ results, term }: Props) {
           <p className="font-bold">Categories</p>
           <div className="flex flex-col">
             <Link href="/search/electronics">Electronics</Link>
-            <Link href="/search/jewelery">Jewelery</Link>
-            <Link href="/search/men's clothing">Men's Clothing</Link>
-            <Link href="/search/women's clothing">Women's Clothing</Link>
+            <Link href="/search/jewelery">Jewelry</Link>
+            <Link href="/search/mens-clothing">Men&apos;s Clothing</Link>
+            <Link href="/search/womens-clothing">Women&apos;s Clothing</Link>
           </div>
         </div>
       </div>
@@ -42,17 +43,19 @@ function ResultsList({ results, term }: Props) {
                 className="border rounded-2xl flex flex-col hover:shadow-lg transition duration-200 ease-in-out"
               >
                 <div className="border-b p-5 flex-1">
-                  <img src={item.image} alt={item.title} className="object-contain h-40" />
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    className="object-contain h-40"
+                    width={200}
+                    height={200}
+                    />
                   <p className="text-[#1B66D2]">{item.title}</p>
                 </div>
 
                 <div className="px-5 py-2">
-                  <p className="font-light">
-                    ${item.price}
-                  </p>
-                  <p className="text-[#1B66D2] font-semibold">
-                    {item.category}
-                  </p>
+                  <p className="font-light">${item.price}</p>
+                  <p className="text-[#1B66D2] font-semibold">{item.category}</p>
                 </div>
               </Link>
             ))
