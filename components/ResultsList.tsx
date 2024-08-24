@@ -9,9 +9,7 @@ type Props = {
 function ResultsList({ results, term }: Props) {
   return (
     <div className="flex md:px-5">
-      {/* Sidebar */}
       <div className="w-36 md:w-64">
-        {/* Placeholder for filters or categories */}
         <div className="border rounded-lg p-5">
           <p className="font-bold">Categories</p>
           <div className="flex flex-col">
@@ -38,7 +36,7 @@ function ResultsList({ results, term }: Props) {
           {results.length > 0 ? (
             results.map((item) => (
               <Link
-                href={`/product/${item.id}`} // Assuming you have a product detail page
+                href={`/product/${item.id}`}
                 key={item.id}
                 prefetch={false}
                 className="border rounded-2xl flex flex-col hover:shadow-lg transition duration-200 ease-in-out"

@@ -1,5 +1,4 @@
-import { ProductData } from "@/typings";
-import { StarIcon } from "@heroicons/react/24/solid";
+
 import Image from "next/image";
 import { notFound } from "next/navigation";
 

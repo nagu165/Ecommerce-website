@@ -3,7 +3,6 @@ import Skeleton from "react-loading-skeleton";
 function LoadingPage() {
   return (
     <div className="p-5 md:p-12">
-      {/* Optional loading message indicating data source */}
       <h2 className="text-xl font-semibold mb-4">Loading Data from FakeStoreAPI...</h2>
       
       <Skeleton />

@@ -16,26 +16,26 @@ const SearchPage = async ({ searchParams, params: { term } }: Props) => {
     redirect('/');
   }
 
-  // Construct the fetch URL for the FakeStoreAPI
+  // fetch URL for the FakeStoreAPI
   let url = `https://fakestoreapi.com/products`;
 
-  // Add search term to the URL if provided
+  // Add search term to the URL
   if (term) {
-    url += `?q=${term}`; // Note: FakeStoreAPI does not support query parameters like this; adjust based on actual API capabilities
+    url += `?q=${term}`;
   }
 
   // Fetch results from the FakeStoreAPI
   const response = await fetch(url, {
-    method: "GET", // Use GET method
+    method: "GET",
     headers: {
       'Content-Type': 'application/json',
     },
     cache: 'no-store',
   });
 
-  // Check for a successful response
+
   if (!response.ok) {
-    return redirect('/'); // Redirect if there's an error
+    return redirect('/');
   }
 
   const results = await response.json() as PageResult[];

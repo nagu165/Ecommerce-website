@@ -4,25 +4,25 @@ const CATEGORIES = [
   {
     id: 1,
     name: "Electronics",
-    image: "/electronic.jpeg", // Replace with actual image URL
+    image: "/electronic.jpeg",
     url: "/search/electronics",
   },
   {
     id: 2,
     name: "Jewelery",
-    image: "/jewelry.jpeg", // Replace with actual image URL
+    image: "/jewelry.jpeg", 
     url: "/search/jewelery",
   },
   {
     id: 3,
     name: "Men's Clothing",
-    image: "/men-clothing.jpeg", // Replace with actual image URL
+    image: "/men-clothing.jpeg", 
     url: "/search/men's clothing",
   },
   {
     id: 4,
     name: "Women's Clothing",
-    image: "/woman-clothing.jpeg", // Replace with actual image URL
+    image: "/woman-clothing.jpeg",
     url: "/search/women's clothing",
   },
 ];
