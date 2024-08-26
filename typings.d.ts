@@ -5,77 +5,29 @@ export type SearchParams = {
     maxPrice?: string;
 };
 
-type PageResult = {
-    id: number; // FakeStoreAPI uses numeric IDs
+export type ProductData = {
+    id: number;
     title: string;
     price: number;
     description: string;
     category: string;
     image: string;
     rating: {
-        rate: number; // Rating value
-        count: number; // Number of ratings
+        rate: number;
+        count: number;
     };
 };
 
-type Content = {
-    results: PageResult[]; // Array of products
+export type Content = {
+    results: ProductData[];
     last_visible_page: number;
     parse_status_code: number;
 };
 
-type Results = {
-    filters: Filter[];
-    organic: Organic[]; // Assuming organic results are products
+export type Results = {
+    organic: ProductData[];
     search_information: {
         query: string;
         showing_results_for: number;
-    };
-};
-
-type Filter = {
-    name: string;
-    values: Value[];
-};
-
-type Value = {
-    url: string;
-    value: string;
-};
-
-type Organic = {
-    id: number; // Product ID
-    title: string;
-    price: number;
-    category: string;
-    image: string;
-    rating: {
-        rate: number; // Rating value
-        count: number; // Number of ratings
-    };
-};
-
-export type ProductData = {
-    id: number; // Product ID
-    title: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    rating: {
-        rate: number; // Rating value
-        count: number; // Number of ratings
-    };
-};
-
-export type ProductContent = {
-    title: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    rating: {
-        rate: number; // Rating value
-        count: number; // Number of ratings
     };
 };

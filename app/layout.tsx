@@ -1,7 +1,7 @@
-import Header from '@/components/Header'
-import './globals.css'
+// app/layout.tsx (Global Layout)
+import './globals.css';
 import Footer from "@/components/Footer";
-
+import { Providers } from './providers';
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,10 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <Providers>
+          <main>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
-  )
+  );
 }

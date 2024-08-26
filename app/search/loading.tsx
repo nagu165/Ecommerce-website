@@ -5,7 +5,7 @@ function LoadingPage() {
   return (
     <div>
       <div className='flex md:px-5'>
-        {/* Sidebar */}
+
         <div className='w-36 md:w-64 space-y-5'>
           {[...Array(4)].map((_, i) => (
             <div key={i} className='border rounded-r-lg md:rounded-lg p-5'>
@@ -17,13 +17,11 @@ function LoadingPage() {
           ))}
         </div>
 
-        {/* Main Body */}
         <div className='px-5 md:p-10 space-y-5 flex-1'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3'>
             <div className='md:col-span-2 lg:col-span-3 xl:col-span-4 px-5 pb-2 text-xl font-semibold'>
-              <h2>Loading Results From FakeStoreAPI</h2>
-              <h2 className='font-extralight text-base animate-pulse text-blue-500'>
-                Fetching Results from FakeStoreAPI!
+              <h2 className='font-extralight text-base animate-pulse text-blue-700'>
+                Fetching Results From MyStore!
               </h2>
             </div>
 

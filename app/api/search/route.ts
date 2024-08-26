@@ -1,30 +1,29 @@
-import { PageResult, SearchParams } from "@/typings";
+import { SearchParams } from "@/typings";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const { searchTerm, pages, ...params } = await request.json();
   const searchParams: SearchParams = params;
 
+
   if (!searchTerm) {
-    return NextResponse.next(
-      new Response("Missing search term", {
-        status: 400,
-      })
+    return NextResponse.json(
+      { message: "Missing search term" },
+      { status: 400 }
     );
   }
 
-  const filters: any = [];
+  const filters: string[] = [];
+
 
   Object.entries(searchParams).forEach(([key, value]) => {
     if (value) {
-      if (key === "max_price") {
-        if (value === "1000+") return;
+      if (key === "maxPrice" && value === "1000+") return; 
+      if (key === 'sortBy') {
+        filters.push(`sort=${value}`);
+      } else {
+        filters.push(`${key}=${Number(value)}`);
       }
-
-      filters.push({
-        key,
-        value: key === 'sort_by' ? value : Number(value),
-      });
     }
   });
 
@@ -34,13 +33,9 @@ export async function POST(request: Request) {
     url += `?q=${searchTerm}`;
   }
 
-  filters.forEach((filter: any) => {
-    if (filter.key === 'category') {
-      url += `&category=${filter.value}`;
-    } else if (filter.key === 'sort_by') {
-      url += `&sort=${filter.value}`;
-    }
-  });
+  if (filters.length > 0) {
+    url += `&${filters.join('&')}`;
+  }
 
   const response = await fetch(url, {
     method: 'GET',
@@ -50,9 +45,14 @@ export async function POST(request: Request) {
     cache: 'no-store',
   });
 
+  if (!response.ok) {
+    return NextResponse.json(
+      { message: "Failed to fetch products" },
+      { status: response.status }
+    );
+  }
+
   const data = await response.json();
 
-  const pageResults: PageResult[] = data;
-
-  return NextResponse.json(pageResults);
+  return NextResponse.json(data);
 }

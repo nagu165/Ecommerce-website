@@ -1,4 +1,3 @@
-
 "use client";
 
 import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon, ShoppingCartIcon } from "@heroicons/react/20/solid";
@@ -6,12 +5,29 @@ import Image from "next/image";
 import Link from "next/link";
 import Avatar from "react-avatar";
 import SearchButton from "./SearchButton";
+import {
+  SearchSelect,
+  SearchSelectItem,
+  Select,
+  SelectItem,
+} from "@tremor/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "./Button";
 
-const Header = () => {
+const SORT_BY_MAP = {
+  r: "Default",
+  rv: "By Review",
+  p: "By Price (low to high)",
+  pd: "By Price (high to low)",
+};
+
+const HeaderWithFilters = () => {
+  const [pages, setPages] = useState("");
+  const [sortBy, setSortBy] = useState("r");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
@@ -20,7 +36,14 @@ const Header = () => {
     e.preventDefault();
     const searchTerm = (e.currentTarget.elements.namedItem("searchTerm") as HTMLInputElement).value;
     if (!searchTerm) return;
-    router.push(`/search/${searchTerm}`);
+    const params = new URLSearchParams();
+
+    if (pages) params.set("pages", pages.toString());
+    if (sortBy) params.set("sort_by", sortBy.toString());
+    if (minPrice) params.set("min_price", minPrice.toString());
+    if (maxPrice) params.set("max_price", maxPrice.toString());
+
+    router.push(`/search/${searchTerm}?${params.toString()}`);
   };
 
   const toggleMenu = () => {
@@ -57,6 +80,48 @@ const Header = () => {
                 <SearchButton />
               </div>
             </form>
+
+            <div className="grid grid-cols-2 gap-2 p-4 md:grid-cols-4 max-w-lg md:max-w-none mx-auto items-center mt-4">
+              <SearchSelect
+                onValueChange={value => setPages(value)}
+                className="min-w-4 bg-white shadow-md rounded-md" placeholder="# of pages">
+                {[...Array(100)].map((_, i) => (
+                  <SearchSelectItem key={i} value={(i + 1).toString()}>
+                    {(i + 1).toString()} pages
+                  </SearchSelectItem>
+                ))}
+              </SearchSelect>
+
+              <Select
+                onValueChange={value => setSortBy(value)}
+                className="min-w-4 bg-white shadow-md rounded-md" placeholder="Sort">
+                {Object.entries(SORT_BY_MAP).map(([key, value]) => (
+                  <SelectItem key={key} value={key}>
+                    {value}
+                  </SelectItem>
+                ))}
+              </Select>
+
+              <SearchSelect
+                onValueChange={value => setMinPrice(value)}
+                className="min-w-4 bg-white shadow-md rounded-md" placeholder="Min Price...">
+                {["", "100", "250", "500", "750", "900", "1000"].map((_, i) => (
+                  <SearchSelectItem key={i} value={_.toString()}>
+                    {i === 0 ? "No Minimum" : `$${_.toString()}`}
+                  </SearchSelectItem>
+                ))}
+              </SearchSelect>
+
+              <SearchSelect
+                onValueChange={value => setMaxPrice(value)}
+                className="min-w-4 bg-white shadow-md rounded-md" placeholder="Max Price...">
+                {["", "100", "250", "500", "750", "900", "1000+"].map((_, i) => (
+                  <SearchSelectItem key={i} value={_.toString()}>
+                    {i === 0 ? "No Maximum" : `$${_.toString()}`}
+                  </SearchSelectItem>
+                ))}
+              </SearchSelect>
+            </div>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -105,6 +170,47 @@ const Header = () => {
                 />
               </div>
             </form>
+            <div className="space-y-2 mb-4">
+              <SearchSelect
+                onValueChange={value => setPages(value)}
+                className="w-full bg-white shadow-md rounded-md" placeholder="# of pages">
+                {[...Array(100)].map((_, i) => (
+                  <SearchSelectItem key={i} value={(i + 1).toString()}>
+                    {(i + 1).toString()} pages
+                  </SearchSelectItem>
+                ))}
+              </SearchSelect>
+              <Select
+                onValueChange={value => setSortBy(value)}
+                className="w-full bg-white shadow-md rounded-md" placeholder="Sort">
+                {Object.entries(SORT_BY_MAP).map(([key, value]) => (
+                  <SelectItem key={key} value={key}>
+                    {value}
+                  </SelectItem>
+                ))}
+              </Select>
+              <SearchSelect
+                onValueChange={value => setMinPrice(value)}
+                className="w-full bg-white shadow-md rounded-md" placeholder="Min Price...">
+                {["", "100", "250", "500", "750", "900", "1000"].map((_, i) => (
+                  <SearchSelectItem key={i} value={_.toString()}>
+                    {i === 0 ? "No Minimum" : `$${_.toString()}`}
+                  </SearchSelectItem>
+                ))}
+              </SearchSelect>
+              <SearchSelect
+                onValueChange={value => setMaxPrice(value)}
+                className="w-full bg-white shadow-md rounded-md" placeholder="Max Price...">
+                {["", "100", "250", "500", "750", "900", "1000+"].map((_, i) => (
+                  <SearchSelectItem key={i} value={_.toString()}>
+                    {i === 0 ? "No Maximum" : `$${_.toString()}`}
+                  </SearchSelectItem>
+                ))}
+              </SearchSelect>
+            </div>
+            <Link href="/cart" className="block text-gray-700 hover:text-gray-900 py-2">
+              Cart
+            </Link>
             {session ? (
               <>
                 <p className="text-gray-700 py-2">{session?.user?.email}</p>
@@ -127,4 +233,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderWithFilters;

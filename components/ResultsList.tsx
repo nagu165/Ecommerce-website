@@ -1,9 +1,9 @@
-import { PageResult } from "@/typings";
+'use client'
 import Link from "next/link";
 import Image from "next/image";
 
 type Props = {
-  results: PageResult[];
+  results: any;
   term: string;
 };
 
@@ -27,7 +27,7 @@ function ResultsList({ results, term }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           <div className="md:col-span-2 lg:col-span-3 xl:col-span-4 py-5">
             <div className="flex space-x-2 items-center divide-x-2">
-              <h1 className="text-lg font-bold">Shop On FakeStoreAPI</h1>
+              <h1 className="text-lg font-bold">Shop On MyStore</h1>
               <h2 className="text-xl font-semibold pl-2">
                 Search results for: {decodeURIComponent(term)}
               </h2>
@@ -35,7 +35,7 @@ function ResultsList({ results, term }: Props) {
           </div>
 
           {results.length > 0 ? (
-            results.map((item) => (
+            results.map((item: any) => (
               <Link
                 href={`/product/${item.id}`}
                 key={item.id}
