@@ -23,7 +23,6 @@ export const NEXT_AUTH: NextAuthOptions = {
         });
 
         if (!user) {
-          // Create a new user
           const hashedPassword = await bcrypt.hash(credentials.password, 10);
           const newUser = await prisma.user.create({
             data: {
