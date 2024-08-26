@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Button } from './Button';
 import prisma from '@/lib/prisma';
+import Image from 'next/image';
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -77,11 +78,11 @@ export default function SignUpPage() {
             
             <div className="mb-4 flex space-x-4">
                 <Button onClick={() => handleProviderSignIn("google")} variant="primary" size="medium" className="flex items-center justify-center">
-                    <img src="/google-logo.svg" alt="Google Logo" className="w-5 h-5 mr-2" />
+                    <Image src="/google-logo.svg" alt="Google Logo" className="w-5 h-5 mr-2" />
                     Sign Up with Google
                 </Button>
                 <Button onClick={() => handleProviderSignIn("github")} variant="secondary" size="medium" className="flex items-center justify-center">
-                    <img src="/github-logo.svg" alt="GitHub Logo" className="w-5 h-5 mr-2" />
+                    <Image src="/github-logo.svg" alt="GitHub Logo" className="w-5 h-5 mr-2" />
                     Sign Up with GitHub
                 </Button>
             </div>
