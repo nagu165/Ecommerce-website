@@ -95,9 +95,9 @@
 
 const Cart = () => {
   return (
-        <div>
-        <p className="text-gray-700">"Your cart is empty."</p>
-        </div>
+    <div>
+      <p className="text-gray-700">&#34;Your cart is empty.&#34;</p>
+    </div>
   );
 }
 
