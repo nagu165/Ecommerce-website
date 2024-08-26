@@ -6,7 +6,7 @@ import GitHubProvider from "next-auth/providers/github";
 import bcrypt from 'bcryptjs';
 import prisma from "@/lib/prisma";
 
-export const NEXT_AUTH: NextAuthOptions = {
+const NEXT_AUTH: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Email',
