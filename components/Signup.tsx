@@ -78,11 +78,11 @@ export default function SignUpPage() {
             
             <div className="mb-4 flex space-x-4">
                 <Button onClick={() => handleProviderSignIn("google")} variant="primary" size="medium" className="flex items-center justify-center">
-                    <Image src="/google-logo.svg" alt="Google Logo" className="w-5 h-5 mr-2" />
+                    <Image src="/google-logo.svg" alt="Google Logo" className="mr-2" width={20} height={20}/>
                     Sign Up with Google
                 </Button>
                 <Button onClick={() => handleProviderSignIn("github")} variant="secondary" size="medium" className="flex items-center justify-center">
-                    <Image src="/github-logo.svg" alt="GitHub Logo" className="w-5 h-5 mr-2" />
+                    <Image src="/github-logo.svg" alt="GitHub Logo" className="mr-2" width={20} height={20}/>
                     Sign Up with GitHub
                 </Button>
             </div>
