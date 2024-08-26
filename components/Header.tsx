@@ -65,7 +65,7 @@ const Header = () => {
             </Link>
             {session ? (
               <div className="hidden md:flex items-center space-x-2">
-                <Avatar name={session?.user?.name} round size="40" className="shadow-md flex-shrink-0" />
+                <Avatar name={session?.user?.name || 'User'} round size="40" className="shadow-md flex-shrink-0" />
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full text-sm"
                   onClick={() => signOut()}
