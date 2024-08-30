@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@tremor/react";
+import Footer from "@/components/Footer";
 
 const CATEGORIES = [
   {
@@ -99,6 +100,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
