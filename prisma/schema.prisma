@@ -16,7 +16,6 @@ model User {
   password      String?
   accounts      Account[]
   sessions      Session[]
-  cart          Cart[]
 }
 
 model Account {
@@ -54,12 +53,12 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Cart {
-  id       Int    @id @default(autoincrement())
-  userId   String
-  product  String
-  quantity Int
-  user     User   @relation(fields: [userId], references: [id])
-
-  @@unique([id, userId])
+model CartProduct {
+  id         String   @id @default(cuid())
+  userId     String
+  title      String
+  image      String
+  base_price Float
+  total_price Float
+  quantity   Int
 }

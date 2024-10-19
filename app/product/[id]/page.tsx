@@ -7,6 +7,7 @@ import LoadingPage from "./loading";
 import { Button } from "@/components/Button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useCart } from '@/context/CartContext';
 
 export const revalidate = 300;
 
@@ -37,6 +38,10 @@ const ProductPage = ({ params: { id } }: Props) => {
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
   const router = useRouter();
+  const { addProductToCart } = useCart();
+  
+  // Cart state
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -54,31 +59,17 @@ const ProductPage = ({ params: { id } }: Props) => {
     loadProduct();
   }, [id]);
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     if (!session || !session.user?.email) {
       console.error('User is not authenticated');
       return;
     }
 
     try {
-      const response = await fetch('/api/cart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: session.user.email,
-          product: productData.title,
-          quantity: 1,
-        }),
-      });
-
-      if (response.ok) {
-        console.log('Product added to cart');
-        router.push('/cart');
-      } else {
-        console.error('Failed to add product to cart');
-      }
+      console.log('Adding product to cart:', productData);
+      addProductToCart(productData);
+      console.log('Product added to cart');
+      router.push('/cart');
     } catch (error) {
       console.error('Error adding product to cart:', error);
     }

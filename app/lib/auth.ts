@@ -1,4 +1,3 @@
-// app/auth.ts or lib/auth.ts
 
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -23,6 +22,9 @@ export const authOptions: NextAuthOptions = {
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
+
+        const ex = await prisma.user.findMany()
+        console.log(ex);
 
         if (!user) {
           const hashedPassword = await bcrypt.hash(credentials.password, 10);
