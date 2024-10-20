@@ -39,9 +39,6 @@ const ProductPage = ({ params: { id } }: Props) => {
   const { data: session } = useSession();
   const router = useRouter();
   const { addProductToCart } = useCart();
-  
-  // Cart state
-  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -60,10 +57,10 @@ const ProductPage = ({ params: { id } }: Props) => {
   }, [id]);
 
   const handleAddToCart = () => {
-    if (!session || !session.user?.email) {
-      console.error('User is not authenticated');
-      return;
-    }
+    // if (!session || !session.user?.email) {
+    //   console.error('User is not authenticated');
+    //   return;
+    // }
 
     try {
       console.log('Adding product to cart:', productData);

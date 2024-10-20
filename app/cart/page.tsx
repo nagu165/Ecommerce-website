@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useCart } from '@/context/CartContext';
-import { Button } from "@/components/Button";
 
 export default function CartPage() {
     const { cartItems, removeProductFromCart, updateQuantity } = useCart();
@@ -18,7 +17,7 @@ export default function CartPage() {
                 <p className="text-gray-500">Please wait as it takes some time to load the products.</p>
                 </>   
             ) : (
-                <div>
+                <div className="pt-10">
                     <div className="space-y-4">
                         {cartItems.map(item => (
                             <div key={item.id} className="flex items-center gap-4 p-4 border rounded-lg">
@@ -26,8 +25,8 @@ export default function CartPage() {
                                     <Image
                                         src={item.image}
                                         alt={item.title}
-                                        width={80}
-                                        height={80}
+                                        width={100}
+                                        height={100}
                                         className="object-contain"
                                     />
                                 </div>
@@ -36,37 +35,37 @@ export default function CartPage() {
                                     <p className="text-gray-600">${item.price.toFixed(2)}</p>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <Button
+                                    <button
                                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                        className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                                        className="px-3 py-1 bg-grey-200 hover:bg-grey-300 rounded-full"
                                     >
                                         -
-                                    </Button>
+                                    </button>
                                     <span className="w-8 text-center">{item.quantity}</span>
-                                    <Button
+                                    <button
                                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                        className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                                        className="px-3 py-1 bg-grey-200 hover:bg-grey-300 rounded-full"
                                     >
                                         +
-                                    </Button>
-                                    <Button
+                                    </button>
+                                    <button
                                         onClick={() => removeProductFromCart(item.id)}
-                                        className="ml-4 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
+                                        className="ml-4 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded"
                                     >
                                         Remove
-                                    </Button>
+                                    </button>
                                 </div>
                             </div>
                         ))}
                     </div>
                     <div className="mt-8 text-right">
                         <p className="text-xl font-bold">Total: ${total.toFixed(2)}</p>
-                        <Button 
-                            className="mt-4 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded"
+                        <button 
+                            className="mt-4 px-3 py-3 bg-purple-500 hover:bg-purple-600 text-white rounded"
                             onClick={() => {}}//TODO: Implement checkout
                         >
-                            Proceed to Checkout
-                        </Button>
+                            Buy Now
+                        </button>
                     </div>
                 </div>
             )}

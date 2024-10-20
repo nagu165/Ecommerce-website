@@ -78,9 +78,9 @@ const Header = () => {
                 <Avatar name="User" round size="40" className="flex-shrink-0" />
               </Link>
             )}
-            <Button variant="secondary" size="small" type="button" onClick={toggleMenu} className="md:hidden">
-              <Bars3Icon className="h-6 w-6 text-gray-400" />
-            </Button>
+            <button onClick={toggleMenu} className="md:hidden font-thin">
+              <Bars3Icon className=" md:hidden h-6 w-6 text-gray-400"/>Menu
+            </button>
           </div>
         </div>
       </div>
