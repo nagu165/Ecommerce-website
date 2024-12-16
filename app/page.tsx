@@ -40,7 +40,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % CATEGORIES.length);
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(timer);
   }, []);
